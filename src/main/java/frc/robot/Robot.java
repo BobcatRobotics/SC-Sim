@@ -25,7 +25,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-
+  //String trajectoryJSON = "/Users/stevencohen/Documents/RobotCode22/SC Sim/PathWeaver/output/PuckUpBall2.wpilib.json";
+  //public Trajectory pickUpBall2Trajectory = new Trajectory();
 
   /**
    * This function is run when the robot is first started up and should be used for any
@@ -38,12 +39,8 @@ public class Robot extends TimedRobot {
 
     m_robotContainer = new RobotContainer();
     
-    /* trajectory stuff SC
-    String trajectoryJSON = "/Users/stevencohen/Documents/RobotCode22/SC Sim/PathWeaver/output/PuckUpBall2.wpilib.json";
-    Trajectory pickUpBall2Trajectory = new Trajectory();
-
-    
-    pickUpBall2Trajectory = null;
+    //trajectory stuff SC
+    /*
       Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
       try {
         pickUpBall2Trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);

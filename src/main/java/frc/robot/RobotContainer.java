@@ -4,20 +4,21 @@
 
 package frc.robot;
 
-/*
-import java.util.List;
+import java.io.IOException;
+import java.nio.file.Path;
+//import java.util.List;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.controller.RamseteController;
 import edu.wpi.first.math.controller.SimpleMotorFeedforward;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
+//import edu.wpi.first.math.geometry.Pose2d;
+//import edu.wpi.first.math.geometry.Rotation2d;
+//import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.math.trajectory.Trajectory;
-import edu.wpi.first.math.trajectory.TrajectoryConfig;
-import edu.wpi.first.math.trajectory.TrajectoryGenerator;
-import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
-*/
-
+//import edu.wpi.first.math.trajectory.TrajectoryConfig;
+//import edu.wpi.first.math.trajectory.TrajectoryGenerator;
+import edu.wpi.first.math.trajectory.TrajectoryUtil;
+//import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
+import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.simulation.JoystickSim;
@@ -33,6 +34,7 @@ import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.RamseteCommand;
 //import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
@@ -127,12 +129,11 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return ramseteAuto;
+    //return ramseteAuto;
   
-    /*
     //return chooser.getSelected(); //ignore for trying autonomous trajectory
      // Create a voltage constraint to ensure we don't accelerate too fast
-      var autoVoltageConstraint =
+      /*var autoVoltageConstraint =
       new DifferentialDriveVoltageConstraint(
           new SimpleMotorFeedforward(
               Constants.ksVolts,
@@ -140,10 +141,10 @@ public class RobotContainer {
               Constants.kaVoltSecondsSquaredPerMeter),
               Constants.kDriveKinematics,
           10);
-
+*/
     // Create config for trajectory
 
-   TrajectoryConfig config =
+  /* TrajectoryConfig config =
       new TrajectoryConfig(
               Constants.kMaxSpeedMetersPerSecond,
               Constants.kMaxAccelerationMetersPerSecondSquared)
@@ -151,11 +152,20 @@ public class RobotContainer {
           .setKinematics(Constants.kDriveKinematics)
           // Apply the voltage constraint
           .addConstraint(autoVoltageConstraint);
+*/
+     String trajectoryJSON = "/Users/stevencohen/Documents/RobotCode22/SCSim/PathWeaver/output/Ball3and4.wpilib.json";
+    Trajectory pickUpBall2Trajectory = new Trajectory();
 
-
+    Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
+    try {
+      pickUpBall2Trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
     // An example trajectory to follow.  All units in meters.
+    /*
     Trajectory exampleTrajectory =
-      TrajectoryGenerator.generateTrajectory(
+        TrajectoryGenerator.generateTrajectory(
           // Start at the origin facing the +X direction
           Constants.INIT_POSE,
           //new Pose2d(5, 5, new Rotation2d(270)),
@@ -169,8 +179,9 @@ public class RobotContainer {
           // Pass config
           config
       );
-    
-    Trajectory exampleTrajectory = robot.getTraj(pickUpBall2Trajectory);
+    */
+
+    Trajectory exampleTrajectory = pickUpBall2Trajectory;
 
     RamseteCommand ramseteCommand =
       new RamseteCommand(
@@ -193,8 +204,8 @@ public class RobotContainer {
     driveTrain.resetOdometry(exampleTrajectory.getInitialPose());
 
    // Run path following command, then stop at the end.
-    return ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0))
-    */
+    return ramseteCommand.andThen(() -> driveTrain.tankDriveVolts(0, 0));
+  
 
   }
 }
