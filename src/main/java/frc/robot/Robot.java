@@ -38,16 +38,6 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
 
     m_robotContainer = new RobotContainer();
-    
-    //trajectory stuff SC
-    /*
-      Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-      try {
-        pickUpBall2Trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
-      } catch (IOException e) {
-        e.printStackTrace();
-      }
-      */
  
   }
 
