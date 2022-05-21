@@ -20,23 +20,26 @@ import edu.wpi.first.math.trajectory.TrajectoryUtil;
 //import edu.wpi.first.math.trajectory.constraint.DifferentialDriveVoltageConstraint;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.GenericHID;
-import edu.wpi.first.wpilibj.Joystick;
+//import edu.wpi.first.wpilibj.Joystick;
 //import edu.wpi.first.wpilibj.simulation.JoystickSim;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import frc.robot.commands.AutoShoot;
-import frc.robot.commands.AutonomousOne;
-import frc.robot.commands.AutonomousTwo;
-import frc.robot.commands.DriveForTime;
-import frc.robot.commands.DriveWithJoysticks;
-import frc.robot.commands.RamseteAuto;
-import frc.robot.commands.ShootBall;
+//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+//import frc.robot.commands.AutoShoot;
+//import frc.robot.commands.AutonomousOne;
+//import frc.robot.commands.AutonomousTwo;
+//import frc.robot.commands.DriveForTime;
+//import frc.robot.commands.DriveWithJoysticks;
+
+//SAVE
+//import frc.robot.commands.RamseteAuto;
+
+//import frc.robot.commands.ShootBall;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.Shooter;
+//import frc.robot.subsystems.Shooter;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 //import edu.wpi.first.wpilibj2.command.RamseteCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+//import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -49,60 +52,67 @@ public class RobotContainer {
  
     //Drivetrain declare
     private  final DriveTrain driveTrain;
-    private final DriveWithJoysticks driveWithJoystick;
-    private final DriveForTime driveForTime;
-    private final DriveForTime driveToDistance;
+   // private final DriveWithJoysticks driveWithJoystick;
+    //private final DriveForTime driveForTime;
+    //private final DriveForTime driveToDistance;
 
-    public static Joystick driverJoystick;
+    //public static Joystick driverJoystick;
      
     //Shooter declare
-    private final Shooter shooter;
-    private final ShootBall shootBall;
-    private final AutoShoot autoShoot;
+    //private final Shooter shooter;
+    //private final ShootBall shootBall;
+    //private final AutoShoot autoShoot;
 
-    private final AutonomousOne autonomousOne;
-    private final AutonomousTwo autonomousTwo;
-    private final RamseteAuto ramseteAuto;
-    SendableChooser<Command> chooser = new SendableChooser<>();
+    //private final AutonomousOne autonomousOne;
+    //private final AutonomousTwo autonomousTwo;
+
+    //SAVE
+    //private final RamseteAuto ramseteAuto;
+
+
+    //SendableChooser<Command> chooser = new SendableChooser<>();
 
    
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     driveTrain = new DriveTrain();
-    driveWithJoystick = new DriveWithJoysticks(driveTrain);  //?? so this is an attribute? But is is an object with methods?
-    driveWithJoystick.addRequirements(driveTrain);
-    driveTrain.setDefaultCommand(driveWithJoystick);
+    //driveWithJoystick = new DriveWithJoysticks(driveTrain);  //?? so this is an attribute? But is is an object with methods?
+   // driveWithJoystick.addRequirements(driveTrain);
+   // driveTrain.setDefaultCommand(driveWithJoystick);
 
-    driveForTime = new DriveForTime(driveTrain);
-    driveForTime.addRequirements(driveTrain);
+    //driveForTime = new DriveForTime(driveTrain);
+    //driveForTime.addRequirements(driveTrain);
 
-    driveToDistance = new DriveForTime(driveTrain);  
-    driveToDistance.addRequirements(driveTrain);
+    //driveToDistance = new DriveForTime(driveTrain);  
+    //driveToDistance.addRequirements(driveTrain);
 
     
     //driverJoystick = new XboxController(Constants.JOYSTICK_NUMBER);
-    driverJoystick = new Joystick(0);
+    //driverJoystick = new Joystick(0);
 
-    shooter = new Shooter();
-    shootBall = new ShootBall(shooter);
-    shootBall.addRequirements(shooter);
+    //shooter = new Shooter();
+    //shootBall = new ShootBall(shooter);
+    //shootBall.addRequirements(shooter);
 
-    autoShoot = new AutoShoot(shooter);
-    autoShoot.addRequirements(shooter);
+   // autoShoot = new AutoShoot(shooter);
+   // autoShoot.addRequirements(shooter);
 
-    autonomousOne = new AutonomousOne(driveTrain, shooter);
-    autonomousTwo = new AutonomousTwo(driveTrain);
-    ramseteAuto = new RamseteAuto(driveTrain);
+    //autonomousOne = new AutonomousOne(driveTrain, shooter);
+    //autonomousTwo = new AutonomousTwo(driveTrain);
+    
+
+    //SAVE
+    //ramseteAuto = new RamseteAuto(driveTrain);
 
     //Add choices  as options here
-    chooser.addOption("Autonomous One",autonomousOne);
-    chooser.addOption("Autonomous Two",autonomousTwo);
-    chooser.addOption("RamseteAuto",ramseteAuto);
+    //chooser.addOption("Autonomous One",autonomousOne);
+    //chooser.addOption("Autonomous Two",autonomousTwo);
+   // chooser.addOption("RamseteAuto",ramseteAuto);
     //Default option
-    chooser.setDefaultOption("Default", autonomousOne);
+    //chooser.setDefaultOption("Default", autonomousOne);
     //Add to Choices to SmartDashboard
-    SmartDashboard.putData("Autotnomous", chooser);
+    //SmartDashboard.putData("Autotnomous", chooser);
 
     // Configure the button bindings
     configureButtonBindings();
@@ -115,11 +125,11 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    JoystickButton shootButton = new JoystickButton(driverJoystick, 1);
-    shootButton.whileHeld(new ShootBall(shooter));
+    //JoystickButton shootButton = new JoystickButton(driverJoystick, 1);
+    //shootButton.whileHeld(new ShootBall(shooter));
 
-    JoystickButton aButton = new JoystickButton(driverJoystick, 2);
-    aButton.whenPressed(new DriveForTime(driveTrain));
+    //JoystickButton aButton = new JoystickButton(driverJoystick, 2);
+    //aButton.whenPressed(new DriveForTime(driveTrain));
   }
 
   /**
